@@ -17,7 +17,9 @@ class CreateOrderKreditDisetujuisTable extends Migration
             $table->id();
             $table->string('no_order_disetujui')->unique();
             $table->bigInteger('master_order_k_id')->unsigned();
+            $table->foreign('master_order_k_id')->references('id')->on('master_order_ks');
             $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
             $table->string('token');
             $table->date('dl_bayar');

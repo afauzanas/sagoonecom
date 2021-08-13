@@ -36,17 +36,18 @@ th {
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
   </form>
 </nav> -->
-<h1>Daftar Pesanan Tunai</h1> 
+<h1>Daftar Pesanan Tunai</h1>
+<h6>{{$name->user->name}} - (Kode Pelanggan: {{$name->user_id}})</h6> 
 <table id="example" class="table" style="width:100%">
     <thead>
         <tr>
             <th>#</th>
             <th>Nomor Order Tunai</th>
-            <th>Pelanggan</th>
             <th>Tanggal Order</th>
             <th>Alamat Penerimaan</th>
             <th>Metode Bayar</th>
             <th>Status Pengiriman</th>
+            <th>Nota</th>
             <th>Action</th>
             <th>Status Konfirmasi</th>
         </tr>
@@ -57,11 +58,13 @@ th {
           <tr>
             <td>{{ $no++ }}</td>
             <td>{{$dpt->no_order}}</td>
-            <td>{{$dpt->user->name}}</td>
             <td>{{$dpt->created_at}}</td>
             <td>{{$dpt->alamat_terima}}</td>
             <td>{{$dpt->metode_bayar->kode_metode}}</td>
             <td>@if($dpt->Pengiriman_barang_t->id > 0) {{'Sudah Dikirim'}} @else {{'Blm Dikirim'}} @endif</td>
+            <td>@if($dpt->Pengiriman_barang_t->id != 0)
+                <a href="{{ route('daftarpesanan.showtunai', $dpt->id) }}" class="btn btn-success">Lihat</a> @endif
+            </td>
             <td>@if($dpt->Pengiriman_barang_t->id != 0 && $dpt->Pengiriman_barang_t->Konfir_terima_barang_t->id == 0)
                 <a href="{{ route('daftarpesanan.createtunai', $dpt->id) }}" class="btn btn-success">Konfir Terima</a> @endif
             </td>

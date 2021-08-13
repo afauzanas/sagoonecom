@@ -13,6 +13,7 @@ use App\Pengiriman_barang_k;
 use App\Detail_order_k;
 use App\Konfir_terima_barang_k;
 use Auth;
+use PDF;
 
 class DpController extends Controller
 {
@@ -24,7 +25,15 @@ class DpController extends Controller
     public function tunai()
     {
         $dpts = Master_order_t::where('user_id', Auth::user()->id)->get();
-        return view('user.daftarpesanan', compact('dpts'));
+        $name = Master_order_k::where('user_id', Auth::user()->id)->first();
+        return view('user.daftarpesanan', compact('dpts', 'name'));
+    }
+
+    public function showtunai($id)
+    {
+        $pbts = Pengiriman_barang_t::where('master_order_t_id', $id)->first();
+        $pdf = PDF::loadview('enota_pdf', ['pbts'=>$pbts])->setPaper('A4', 'potrait');
+        return $pdf->stream();
     }
 
     public function createtunai($id)
@@ -55,7 +64,16 @@ class DpController extends Controller
     public function kredit()
     {
         $dpks = Master_order_k::where('user_id', Auth::user()->id)->get();
-        return view('user.daftarpesanank', compact('dpks'));
+        $name = Master_order_k::where('user_id', Auth::user()->id)->first();
+        return view('user.daftarpesanank', compact('dpks', 'name'));
+    }
+
+    public function showkredit($id)
+    {
+        $okd = Order_kredit_disetujui::where('master_order_k_id', $id)->first();
+        $pbks = Pengiriman_barang_k::where('order_kredit_disetujui_id', $okd->id)->first();
+        $pdf = PDF::loadview('faktur_pdf', ['pbks'=>$pbks])->setPaper('A4', 'potrait');
+        return $pdf->stream();
     }
 
     public function createkredit($id)
@@ -82,4 +100,12 @@ class DpController extends Controller
         ]);
         return redirect('/daftarpesanankredit')->with('success', 'Orderan Diterima SUDAH dikonfirmasi!');
     }
+
+    public function destroykredit($id)
+    {
+        Detail_order_k::where('master_order_k_id', $id)->delete();
+        Master_order_k::destroy($id);
+        return back()->with('success', 'Order Kredit sukses dibatalkan!');
+    }
+
 }

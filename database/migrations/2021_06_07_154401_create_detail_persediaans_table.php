@@ -16,7 +16,9 @@ class CreateDetailPersediaansTable extends Migration
         Schema::create('detail_persediaans', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('master_persediaan_id')->unsigned();
+            $table->foreign('master_persediaan_id')->references('id')->on('master_persediaans');
             $table->bigInteger('product_id')->unsigned();
+            $table->foreign('product_id')->references('id')->on('products');
             $table->integer('unit_masuk');
             $table->timestamps();
         });

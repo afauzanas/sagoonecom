@@ -45,7 +45,7 @@
             <td>{{$product->image}}</td>
             <td>
             <a href="/products/formedit/{{$product->id}}" class="btn btn-success">Edit</a>
-              <form action="/products/delete/{{$product->id}}" method="POST" class="d-inline">
+              <form action="/products/delete/{{$product->id}}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus {{$product->name}} ?')">
                   @csrf
                   @method('DELETE')
                  <button type="submit" class="btn btn-danger">Delete</button>

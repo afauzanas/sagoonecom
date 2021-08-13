@@ -10,7 +10,7 @@
 
 @section('content')
 <div class="container mt-5" style="width: 50%;">
-  <form class="mb-6" action="{{ route('menupersediaan.update', $masterpersediaans->id) }}" method="POST">
+  <form class="mb-6" action="{{ route('menupersediaan.update', $masterpersediaans->id) }}" method="POST" onsubmit="return confirm('Yakin ingin mengedit {{$masterpersediaans->no_mutasi}} ?')">
     @csrf
     @method('PATCH')
     <h1 class="text-center mb-6">Edit Persediaan Masuk</h1>

@@ -18,12 +18,15 @@ class CreatePengirimanBarangTsTable extends Migration
             $table->string('no_enota')->unique();
             $table->timestamps();
             $table->bigInteger('master_order_t_id')->unsigned();
+            $table->foreign('master_order_t_id')->references('id')->on('master_order_ts');
             $table->date('tgl_kirim');
             $table->string('ongkir');
             $table->date('estimasi_sampai');
             $table->bigInteger('ekspedisi_id')->unsigned();
+            $table->foreign('ekspedisi_id')->references('id')->on('ekspedisis');
             $table->string('resi_pengiriman');
             $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

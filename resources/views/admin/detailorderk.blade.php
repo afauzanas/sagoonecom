@@ -11,6 +11,7 @@
 @section('content')
 <div class="container">
 <h1>Detail Order Kredit</h1>
+<h5>{{$name->master_order_k->user->name}} - (Kode Pelanggan: {{$name->master_order_k->user->id}})</h5>
 <table class="table">
     <thead>
         <tr>
@@ -34,6 +35,8 @@
     </tbody>
 </table>
 {{$detailorderks->links()}}
+<h6><b>Alamat Penerimaan:</b> {{$name->master_order_k->alamat_terima}}</h6>
+<h6><b>Metode bayar:</b> {{$name->master_order_k->metode_bayar->metode_bayar}}</h6><br>
 <a class="btn btn-dark" href="/menuorderk">Kembali</a>
 </div>
 @endsection

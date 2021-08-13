@@ -10,7 +10,7 @@
 
 @section('content')
 <div class="container mt-5" style="width: 50%;">
-  <form class="mb-6" action="/products/edit/{{$products->id}}" method="POST" enctype="multipart/form-data">
+  <form class="mb-6" action="/products/edit/{{$products->id}}" method="POST" enctype="multipart/form-data" onsubmit="return confirm('Yakin ingin mengedit {{$products->name}} ?')">
     @csrf
     @method('PATCH')
     <h1 class="text-center mb-6">Edit Barang/Produk</h1>

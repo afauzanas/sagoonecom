@@ -38,7 +38,7 @@
             <td>{{$metode_bayar->metode_bayar}}</td>
             <td>
             <a href="/metode_bayar/formedit/{{$metode_bayar->id}}" class="btn btn-success">Edit</a>
-              <form action="/metode_bayar/delete/{{$metode_bayar->id}}" method="POST" class="d-inline">
+              <form action="/metode_bayar/delete/{{$metode_bayar->id}}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus {{$metode_bayar->metode_bayar}} ?')">
                   @csrf
                   @method('DELETE')
                  <button type="submit" class="btn btn-danger">Delete</button>

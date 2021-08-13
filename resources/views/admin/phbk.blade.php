@@ -44,7 +44,7 @@
             <td>{{$phbk->user->name}}</td>
             <td>
             <a href="{{ route('phbk.show', $phbk->id) }}" class="btn btn-primary">Setujui</a>
-                <form action="{{ route('phbk.destroy', $phbk->id) }}" method="POST" class="d-inline">
+                <form action="{{ route('phbk.destroy', $phbk->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus {{$phbk->no_minta_kredit}} ?')">
                   @csrf
                   @method('DELETE')
                  <button type="submit" class="btn btn-danger">Delete</button>

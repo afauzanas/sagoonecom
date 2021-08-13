@@ -31,7 +31,7 @@
                 </ul>
             </div>
         @endif
-  <form class="mb-6" action="{{ route('pbt.update', $pbt->id) }}" method="POST">
+  <form class="mb-6" action="{{ route('pbt.update', $pbt->id) }}" method="POST" onsubmit="return confirm('Yakin ingin mengedit {{$pbt->no_enota}} ?')">
     @csrf
     @method('PATCH')
     <h1 class="text-center mb-6">Edit Data Pengiriman Barang Tunai</h1><br>

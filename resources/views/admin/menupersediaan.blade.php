@@ -49,7 +49,7 @@ th {
             <td>
             <a href="{{ route('menupersediaan.edit', $mp->id)}}" class="btn btn-success">Edit</a>
             <a href="{{ route('menupersediaan.show', $mp->id) }}" class="btn btn-warning">Detail</a>
-              <form action="{{ route('menupersediaan.destroy', $mp->id) }}" method="POST" class="d-inline">
+              <form action="{{ route('menupersediaan.destroy', $mp->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus {{$mp->no_mutasi}} ?')">
                   @csrf
                   @method('DELETE')
                  <button type="submit" class="btn btn-danger">Delete</button>

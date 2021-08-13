@@ -62,17 +62,20 @@ th {
             <td>
             <a href="{{ route('pbt.show', $pbt->id) }}" class="btn btn-success">Lihat</a>
             <a href="{{ route('pbt.edit', $pbt->id) }}" class="btn btn-secondary">Edit</a>
-                <form action="{{ route('pbt.destroy', $pbt->id) }}" method="POST" class="d-inline">
+                <form action="{{ route('pbt.destroy', $pbt->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin mengapus {{$pbt->no_enota}} ? Nomor E-Nota akan dilanjutkan pada inputan selanjutnya!')">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">Hapus</button>
                 </form>
             </td>
-            <td>@if($pbt->Konfir_terima_barang_t->id > 0) {{'Diterima'}} @else {{'BD'}} @endif</td>
+            <td>@if($pbt->Konfir_terima_barang_t->id > 0) {{'D'}} @else {{'BD'}} @endif</td>
           </tr>
         @endforeach
     </tbody>
 </table>
+<h6><b>Keterangan:</b></h6>
+<h6>D = Sudah Diterima</h6>
+<h6>BD = Belum Diterima</h6>
 </div>
 @endsection
 

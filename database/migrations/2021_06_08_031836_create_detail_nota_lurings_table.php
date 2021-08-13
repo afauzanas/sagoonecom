@@ -16,7 +16,9 @@ class CreateDetailNotaLuringsTable extends Migration
         Schema::create('detail_nota_lurings', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('master_nota_luring_id')->unsigned();
+            $table->foreign('master_nota_luring_id')->references('id')->on('master_nota_lurings');
             $table->bigInteger('product_id')->unsigned();
+            $table->foreign('product_id')->references('id')->on('products');
             $table->integer('unit');
             $table->string('harga');
             $table->timestamps();

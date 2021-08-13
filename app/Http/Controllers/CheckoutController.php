@@ -9,6 +9,7 @@ use App\Master_order_k;
 use App\Master_order_t;
 use App\Master_nota_luring;
 use DB;
+use App\Permintaan_hb_kredit;
 
 class CheckoutController extends Controller
 {
@@ -22,7 +23,7 @@ class CheckoutController extends Controller
     {
         $kps = DB::select("SELECT Tabel_bantuans.id, Tabel_bantuans.name, Tabel_bantuans.unit_masuk, Tabel_bantuans.keluar_tunai, Tabel_bantuans.keluar_luring, Tabel_bantuans.keluar_kredit, Tabel_bantuans.saldo FROM 
                             (SELECT Products.id, Products.name, ifnull(satus.unit_masuk, 0) AS unit_masuk, ifnull(duas.qty, 0) AS keluar_tunai, ifnull(tigas.unit, 0) AS keluar_luring, ifnull(empats.qty, 0) AS keluar_kredit, 
-                            (satus.unit_masuk - duas.qty - tigas.unit - empats.qty) AS saldo FROM Products
+                            (ifnull(satus.unit_masuk,0) - ifnull(duas.qty,0) - ifnull(tigas.unit,0) - ifnull(empats.qty,0)) AS saldo FROM Products
                                 LEFT JOIN (SELECT Detail_persediaans.product_id, SUM(unit_masuk) AS unit_masuk FROM Detail_persediaans GROUP BY product_id) satus
                                 ON Products.id = satus.product_id
                                 LEFT JOIN (SELECT Detail_order_tunais.product_id, SUM(qty) AS qty FROM Detail_order_tunais GROUP BY product_id) duas
@@ -59,6 +60,12 @@ class CheckoutController extends Controller
                 }
         }
 
+        $cek_hb = Permintaan_hb_kredit::where('user_id', Auth::user()->id)->first();
+        if($cek_hb == null ) {
+            return redirect('/cart')->with('error', 'Anda belum memiliki HAK BELI Kredit, Ajukan permohonan hak beli kredit di pojok kanan atas!');
+         } elseif($cek_hb->Hb_kredit_disetujui->id == 0){
+            return redirect('/cart')->with('error', 'Permohonan hak beli kredit anda BELUM disetujui!');
+         }
 
         $transaction = Master_order_k::create([
             'user_id' => Auth::user()->id,
@@ -82,7 +89,7 @@ class CheckoutController extends Controller
     {
         $kps = DB::select("SELECT Tabel_bantuans.id, Tabel_bantuans.name, Tabel_bantuans.unit_masuk, Tabel_bantuans.keluar_tunai, Tabel_bantuans.keluar_luring, Tabel_bantuans.keluar_kredit, Tabel_bantuans.saldo FROM 
                             (SELECT Products.id, Products.name, ifnull(satus.unit_masuk, 0) AS unit_masuk, ifnull(duas.qty, 0) AS keluar_tunai, ifnull(tigas.unit, 0) AS keluar_luring, ifnull(empats.qty, 0) AS keluar_kredit, 
-                            (satus.unit_masuk - duas.qty - tigas.unit - empats.qty) AS saldo FROM Products
+                            (ifnull(satus.unit_masuk,0) - ifnull(duas.qty,0) - ifnull(tigas.unit,0) - ifnull(empats.qty,0)) AS saldo FROM Products
                                 LEFT JOIN (SELECT Detail_persediaans.product_id, SUM(unit_masuk) AS unit_masuk FROM Detail_persediaans GROUP BY product_id) satus
                                 ON Products.id = satus.product_id
                                 LEFT JOIN (SELECT Detail_order_tunais.product_id, SUM(qty) AS qty FROM Detail_order_tunais GROUP BY product_id) duas
@@ -139,7 +146,7 @@ class CheckoutController extends Controller
     {
         $kps = DB::select("SELECT Tabel_bantuans.id, Tabel_bantuans.name, Tabel_bantuans.unit_masuk, Tabel_bantuans.keluar_tunai, Tabel_bantuans.keluar_luring, Tabel_bantuans.keluar_kredit, Tabel_bantuans.saldo FROM 
                             (SELECT Products.id, Products.name, ifnull(satus.unit_masuk, 0) AS unit_masuk, ifnull(duas.qty, 0) AS keluar_tunai, ifnull(tigas.unit, 0) AS keluar_luring, ifnull(empats.qty, 0) AS keluar_kredit, 
-                            (satus.unit_masuk - duas.qty - tigas.unit - empats.qty) AS saldo FROM Products
+                            (ifnull(satus.unit_masuk,0) - ifnull(duas.qty,0) - ifnull(tigas.unit,0) - ifnull(empats.qty,0)) AS saldo FROM Products
                                 LEFT JOIN (SELECT Detail_persediaans.product_id, SUM(unit_masuk) AS unit_masuk FROM Detail_persediaans GROUP BY product_id) satus
                                 ON Products.id = satus.product_id
                                 LEFT JOIN (SELECT Detail_order_tunais.product_id, SUM(qty) AS qty FROM Detail_order_tunais GROUP BY product_id) duas

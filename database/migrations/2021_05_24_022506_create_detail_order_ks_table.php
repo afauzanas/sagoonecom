@@ -18,6 +18,7 @@ class CreateDetailOrderKsTable extends Migration
             $table->bigInteger('master_order_k_id')->unsigned();
             $table->foreign('master_order_k_id')->references('id')->on('master_order_ks');
             $table->bigInteger('product_id')->unsigned();
+            $table->foreign('product_id')->references('id')->on('products');
             $table->integer('qty');
             $table->string('harga');
             $table->timestamps();

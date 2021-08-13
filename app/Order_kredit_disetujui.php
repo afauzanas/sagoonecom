@@ -4,7 +4,6 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Alfa6661\AutoNumber\AutoNumberTrait;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 
 class Order_kredit_disetujui extends Model
@@ -27,8 +26,6 @@ class Order_kredit_disetujui extends Model
             ]
         ];
     }
-
-    use SoftDeletes;
 
     protected $fillable = [
         'no_order_disetujui', 'master_order_k_id', 'user_id', 'token', 'dl_bayar'

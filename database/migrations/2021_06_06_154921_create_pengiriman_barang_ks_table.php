@@ -18,12 +18,15 @@ class CreatePengirimanBarangKsTable extends Migration
             $table->string('no_faktur')->unique();
             $table->timestamps();
             $table->bigInteger('order_kredit_disetujui_id')->unsigned();
+            $table->foreign('order_kredit_disetujui_id')->references('id')->on('order_kredit_disetujuis');
             $table->date('tgl_kirim');
             $table->string('ongkir');
             $table->date('estimasi_sampai');
             $table->bigInteger('ekspedisi_id')->unsigned();
+            $table->foreign('ekspedisi_id')->references('id')->on('ekspedisis');
             $table->string('resi_pengiriman');
             $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

@@ -19,6 +19,7 @@ class CreateMasterPersediaansTable extends Migration
             $table->timestamps();
             $table->date('tgl_masuk');
             $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

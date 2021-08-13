@@ -16,9 +16,11 @@ class CreateKonfirTerimaBarangTsTable extends Migration
         Schema::create('konfir_terima_barang_ts', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('pengiriman_barang_t_id')->unsigned();
+            $table->foreign('pengiriman_barang_t_id')->references('id')->on('pengiriman_barang_ts');
             $table->timestamps();
             $table->date('tgl_terima');
             $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

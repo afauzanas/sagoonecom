@@ -37,7 +37,7 @@
             <td>{{$category->name}}</td>
             <td>
             <a href="/category/formedit/{{$category->id}}" class="btn btn-success">Edit</a>
-              <form action="/category/delete/{{$category->id}}" method="POST" class="d-inline">
+              <form action="/category/delete/{{$category->id}}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin mengapus {{$category->name}} ?')">
                   @csrf
                   @method('DELETE')
                  <button type="submit" class="btn btn-danger">Delete</button>

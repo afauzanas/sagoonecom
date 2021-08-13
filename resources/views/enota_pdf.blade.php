@@ -17,38 +17,39 @@
             <th rowspan="3"><img src="{{ public_path('images/Logo-Sagoonecom.png') }}" alt="nopic" height="100" width="100"></th>
             <th>CV Podomoro Makassar</th>
             <th colspan="3" style="text-align: right;">Tgl E-Nota:</th>
-            <th>{{$pbts->created_at}}</th>
+            <td style="text-align: center;">{{$pbts->created_at}}</td>
         </tr>
         <tr>
-            <th>Barombong sjkahcuiab</th>
+            <td style="text-align: center;">Jalan Pemandian Alam Perumahan Bumi Asri Barombong Blok C Nomor 2, Kec. Tamalate, Makassar</td>
             <th colspan="3" style="text-align: right;">No. E-Nota:</th>
-            <th>{{$pbts->no_enota}}</th>
+            <td style="text-align: center;">{{$pbts->no_enota}}</td>
         </tr>
         <tr>
             <th colspan="4" style="text-align: right;">No. Order:</th>
-            <th>{{$pbts->master_order_t->no_order}}</th>
+            <td style="text-align: center;">{{$pbts->master_order_t->no_order}}</td>
         </tr>
         <tr>
             <th>Tgl. Kirim:</th>
-            <th colspan="3" style="text-align: left;">{{$pbts->tgl_kirim}}</th>
+            <td colspan="3" style="text-align: left;">{{$pbts->tgl_kirim}}</td>
             <th style="text-align: right;">Kepada:</th>
-            <th>{{$pbts->master_order_t->user->name}}</th>
+            <td style="text-align: center;">{{$pbts->master_order_t->user->name}}</td>
         </tr>
         <tr>
             <th>Ekspedisi:</th>
-            <th colspan="3" style="text-align: left;">{{$pbts->ekspedisi->nama_ekspedisi}}</th>
+            <td colspan="3" style="text-align: left;">{{$pbts->ekspedisi->nama_ekspedisi}}</td>
         </tr>
         <tr>
             <th>Resi Pengiriman:</th>
-            <th colspan="3" style="text-align: left;">{{$pbts->resi_pengiriman}}</th>
+            <td colspan="3" style="text-align: left;">{{$pbts->resi_pengiriman}}</td>
         </tr>
+    </thead>
 </table>
 <br>
 <table class="table" border="1" style="width:100%">
     <thead>
         <tr>
             <th>Unit</th>
-            <th colspan="3">Nama Barang</th>
+            <th>Nama Barang</th>
             <th>Harga/Unit</th>
             <th>Jumlah</th>
         </tr>
@@ -60,7 +61,7 @@
         @foreach($pbts->Master_order_t->detail as $key => $pbt)
           <tr>
             <td style="text-align: center;">{{$pbt->qty}}</td>
-            <td colspan="3" style="text-align: center;">{{$pbt->product->name}}</td>
+            <td style="text-align: center;">{{$pbt->product->name}}</td>
             <td style="text-align: center;">{{$pbt->harga}}</td>
             <td style="text-align: center;">{{$pbt->qty * $pbt->harga}}</td>
           </tr>
@@ -71,20 +72,29 @@
     </tbody>
 </table>
 <br>
+<table class="table" rules="none" style="width:45%">
+    <tr>
+        <td>Alamat Penerimaan Barang:</td>
+    </tr>
+    <tr>
+        <td>{{$pbts->master_order_t->alamat_terima}}</td>
+    </tr>
+</table>
+<br>
 <table class="table" rules="none" style="width:100%">
     <tfoot>
         <tr>
-              <th colspan="4">Perhatiaan !!!</th>
+              <td style="text-align: center;">Perhatiaan !!!</td>
               <th>Subtotal:</th>
-              <th>{{$jumlah}}</th>
+              <td style="text-align: center;">{{$jumlah}}</td>
         </tr>
         <tr>
-              <th colspan="4">Biaya Pengiriman Dibayar</th>
+              <td style="text-align: center;">Biaya Pengiriman Dibayar</td>
               <th>Biaya Pengiriman:</th>
-            <th>{{$pbts->ongkir}}</th>
+                <td style="text-align: center;">{{$pbts->ongkir}}</td>
         </tr>
         <tr>
-            <th colspan="4">secara COD</th>
+            <td style="text-align: center;">secara COD</td>
             <th>TOTAL:</th>
             <th>{{$jumlah + $pbts->ongkir}}</th>
         </tr>

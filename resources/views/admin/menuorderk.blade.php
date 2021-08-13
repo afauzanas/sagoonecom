@@ -44,10 +44,9 @@ th {
             <th>Nomor Order Kredit</th>
             <th>Pelanggan</th>
             <th>Tanggal Order</th>
-            <th>Alamat Penerimaan</th>
-            <th>Metode Bayar</th>
             <th width="18%">Action</th>
             <th>Status</th>
+            <th>Pembayaran</th>
         </tr>
     </thead>
     <tbody>
@@ -59,17 +58,21 @@ th {
             <td>{{$masterorderk->no_order}}</td>
             <td>{{$masterorderk->user_id}}</td>
             <td>{{$masterorderk->created_at}}</td>
-            <td>{{$masterorderk->alamat_terima}}</td>
-            <td>{{$masterorderk->metode_bayar->kode_metode}}</td>
             <td>
             <a href="/menuorderk/detail/{{$masterorderk->id}}" class="btn btn-info d-inline">detail</a>
             <a href="/menuorderk/show/{{$masterorderk->id}}" class="btn btn-success d-inline">Setujui</a>
             </td>
-            <td>@if($masterorderk->Order_kredit_disetujui->id > 0) {{'SDS'}} @else {{'BDS'}} @endif</td>
+            <td>@if($masterorderk->Order_kredit_disetujui->id > 0) {{'SD'}} @else {{'BD'}} @endif</td>
+            <td>@if($masterorderk->Order_kredit_disetujui->Pengiriman_barang_k->faktur_lunas->id !=0)
+                    {{'Lunas'}} @else {{'Belum Lunas'}} @endif
+            </td>
           </tr>
         @endforeach
     </tbody>
 </table>
+<h6><b>Keterangan:</b></h6>
+<h6>SD = Sudah Disetujui</h6>
+<h6>BD = Belum Disetujui</h6>
 </div>
 @endsection
 

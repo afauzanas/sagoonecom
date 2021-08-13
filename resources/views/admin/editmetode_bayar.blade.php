@@ -10,10 +10,10 @@
 
 @section('content')
 <div class="container mt-5" style="width: 50%;">
-  <form class="mb-6" action="/metode_bayar/edit/{{$metode_bayars->id}}" method="POST">
+  <form class="mb-6" action="/metode_bayar/edit/{{$metode_bayars->id}}" method="POST" onsubmit="return confirm('Yakin ingin mengedit metode {{$metode_bayars->metode_bayar}} ?')">
     @csrf
     @method('PATCH')
-    <h1 class="text-center mb-6">Tambah Metode Bayar</h1>
+    <h1 class="text-center mb-6">Edit Metode Bayar</h1>
     <div class="form-row">
       <div class="form-group col-md-3">
         <label for="kode_metode">Kode Metode Bayar</label>

@@ -52,7 +52,7 @@
             <a href="/okd/lihatorder/{{$okd->id}}" class="btn btn-success">Lihat Orderan</a>
             <a href="{{ route('okd.edit', $okd->id) }}" class="btn btn-secondary">Edit</a>
             <a href="{{ route('okd.show', $okd->id) }}" class="btn btn-primary">Kirim Orderan</a>
-                <form action="{{ route('okd.delete', $okd->id) }}" method="POST" class="d-inline">
+                <form action="{{ route('okd.delete', $okd->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus {{$okd->no_order_disetujui}} ?')">
                   @csrf
                   @method('DELETE')
                  <button type="submit" class="btn btn-danger">Delete</button>
@@ -63,6 +63,9 @@
         @endforeach
     </tbody>
 </table>
+<h6><b>Keterangan:</b></h6>
+<h6>SD = Sudah Dikirim</h6>
+<h6>BD = Belum Dikirim</h6>
 </div>
 @endsection
 

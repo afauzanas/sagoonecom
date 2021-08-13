@@ -10,7 +10,7 @@
 
 @section('content')
 <div class="container mt-5" style="width: 50%;">
-  <form class="mb-6" action="/category/edit/{{$categories->id}}" method="POST">
+  <form class="mb-6" action="/category/edit/{{$categories->id}}" method="POST" onsubmit="return confirm('Yakin ingin mengedit {{$categories->name}} ?')">
     @csrf
     @method('PATCH')
     <h1 class="text-center mb-6">Tambah Kategori</h1>

@@ -10,7 +10,7 @@
 
 @section('content')
 <div class="container mt-5" style="width: 50%;">
-  <form class="mb-6" action="{{ route('ekspedisi.edit', $ekspedisi->id) }}" method="POST">
+  <form class="mb-6" action="{{ route('ekspedisi.edit', $ekspedisi->id) }}" method="POST" onsubmit="return confirm('Yakin ingin mengedit {{$ekspedisi->nama_ekspedisi}} ?')">
     @csrf
     @method('PATCH')
     <h1 class="text-center mb-6">Edit Ekspedisi</h1>

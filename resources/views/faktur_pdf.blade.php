@@ -17,30 +17,34 @@
             <th rowspan="3"><img src="{{ public_path('images/Logo-Sagoonecom.png') }}" alt="nopic" height="100" width="100"></th>
             <th>CV Podomoro Makassar</th>
             <th colspan="3" style="text-align: right;">Tgl Faktur:</th>
-            <th>{{$pbks->created_at}}</th>
+            <td style="text-align: center;">{{$pbks->created_at}}</td>
         </tr>
         <tr>
-            <th>Barombong sjkahcuiab</th>
+            <td style="text-align: center;">Jalan Pemandian Alam Perumahan Bumi Asri Barombong Blok C Nomor 2, Kec. Tamalate, Makassar</td>
             <th colspan="3" style="text-align: right;">No. Faktur:</th>
-            <th>{{$pbks->no_faktur}}</th>
+            <td style="text-align: center;">{{$pbks->no_faktur}}</td>
         </tr>
         <tr>
-            <th colspan="4" style="text-align: right;">No. Order:</th>
-            <th>{{$pbks->order_kredit_disetujui->master_order_k->no_order}}</th>
+            <th colspan="4" style="text-align: right;">Jatuh Tempo:</th>
+            <td style="text-align: center;">{{$pbks->order_kredit_disetujui->dl_bayar}}</td>
         </tr>
         <tr>
             <th>Tgl. Kirim:</th>
-            <th colspan="3" style="text-align: left;">{{$pbks->tgl_kirim}}</th>
-            <th style="text-align: right;">Kepada:</th>
-            <th>{{$pbks->order_kredit_disetujui->master_order_k->user->name}}</th>
+            <td colspan="2" style="text-align: left;">{{$pbks->tgl_kirim}}</td>
+            <th colspan="2" style="text-align: right;">Token:</th>
+            <td style="text-align: center;">{{$pbks->order_kredit_disetujui->token}}</td>
         </tr>
         <tr>
             <th>Ekspedisi:</th>
-            <th colspan="3" style="text-align: left;">{{$pbks->ekspedisi->nama_ekspedisi}}</th>
+            <td colspan="3" style="text-align: left;">{{$pbks->ekspedisi->nama_ekspedisi}}</td>
+            <th style="text-align: right;">No. Order:</th>
+            <td style="text-align: center;">{{$pbks->order_kredit_disetujui->master_order_k->no_order}}</td>
         </tr>
         <tr>
             <th>Resi Pengiriman:</th>
-            <th colspan="3" style="text-align: left;">{{$pbks->resi_pengiriman}}</th>
+            <td colspan="3" style="text-align: left;">{{$pbks->resi_pengiriman}}</td>
+            <th style="text-align: right;">Kepada:</th>
+            <td style="text-align: center;">{{$pbks->order_kredit_disetujui->master_order_k->user->name}}</td>
         </tr>
 </table>
 <br>
@@ -48,7 +52,7 @@
     <thead>
         <tr>
             <th>Unit</th>
-            <th colspan="3">Nama Barang</th>
+            <th>Nama Barang</th>
             <th>Harga/Unit</th>
             <th>Jumlah</th>
         </tr>
@@ -60,7 +64,7 @@
         @foreach($pbks->order_kredit_disetujui->Master_order_k->detail as $key => $pbk)
           <tr>
             <td style="text-align: center;">{{$pbk->qty}}</td>
-            <td colspan="3" style="text-align: center;">{{$pbk->product->name}}</td>
+            <td style="text-align: center;">{{$pbk->product->name}}</td>
             <td style="text-align: center;">{{$pbk->harga}}</td>
             <td style="text-align: center;">{{$pbk->qty * $pbk->harga}}</td>
           </tr>
@@ -71,20 +75,29 @@
     </tbody>
 </table>
 <br>
+<table class="table" rules="none" style="width:45%">
+    <tr>
+        <td>Alamat Penerimaan Barang:</td>
+    </tr>
+    <tr>
+        <td>{{$pbks->order_kredit_disetujui->master_order_k->alamat_terima}}</td>
+    </tr>
+</table>
+<br>
 <table class="table" rules="none" style="width:100%">
     <tfoot>
         <tr>
-              <th colspan="4">Perhatiaan !!!</th>
+              <td style="text-align: center;">Catatan !!!</td>
               <th>Subtotal:</th>
-              <th>{{$jumlah}}</th>
+              <td style="text-align: center;">{{$jumlah}}</td>
         </tr>
         <tr>
-              <th colspan="4">Khusus Biaya Pengiriman, Dibayar</th>
+              <td style="text-align: center;">Khusus Biaya Pengiriman, Dibayar</td>
               <th>Biaya Pengiriman:</th>
-            <th>{{$pbks->ongkir}}</th>
+            <td style="text-align: center;">{{$pbks->ongkir}}</td>
         </tr>
         <tr>
-            <th colspan="4">Ketika Barang Diterima</th>
+            <td style="text-align: center;">Ketika Barang Diterima</td>
             <th>TOTAL:</th>
             <th>{{$jumlah + $pbks->ongkir}}</th>
         </tr>

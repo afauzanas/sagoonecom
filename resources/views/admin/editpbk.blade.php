@@ -20,7 +20,7 @@
                 </ul>
             </div>
         @endif
-  <form class="mb-6" action="{{ route('pbk.update', $pbk->id) }}" method="POST">
+  <form class="mb-6" action="{{ route('pbk.update', $pbk->id) }}" method="POST" onsubmit="return confirm('Yakin ingin mengedit {{$pbk->no_faktur}} ?')">
     @csrf
     @method('PATCH')
     <h1 class="text-center mb-6">Edit Data Pengiriman Barang Kredit</h1><br>

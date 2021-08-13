@@ -66,14 +66,14 @@ th {
 </table>
 <div class="form-row">
     <div class="form-group col-md-2">
-        <form action="{{ route('hbkd.store') }}" method="POST">
+        <form action="{{ route('hbkd.store') }}" method="POST" onsubmit="return confirm('Yakin ingin menyetujui permintaan Hak Beli Kredit dari {{$phbks->user->name}} ?')">
             @csrf
             <input type="hidden" name="permintaan_hb_kredit_id" value="{{$phbks->id}}" id="permintaan_hb_kredit_id" readonly>
             <button type="submit" class="btn btn-primary">Setujui HBK</button>
         </form>
     </div>
     <div class="form-group col-md-1">
-        <form action="{{ route('phbk.destroy', $phbks->id) }}" method="POST" class="d-inline">
+        <form action="{{ route('phbk.destroy', $phbks->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menolak permintaan Hak Beli Kredit {{$phbks->user->name}} ?')">
                   @csrf
                   @method('DELETE')
                  <button type="submit" class="btn btn-danger">Tolak PHBK</button>

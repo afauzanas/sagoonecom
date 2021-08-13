@@ -9,6 +9,7 @@ use App\Detail_order_k;
 use App\Ekspedisi;
 use App\Pengiriman_barang_k;
 use Auth;
+use DB;
 
 class OkdController extends Controller
 {
@@ -25,6 +26,33 @@ class OkdController extends Controller
 
     public function store(Request $request)
     {
+        $kps = DB::select("SELECT Tabel_bantuans.id, Tabel_bantuans.name, Tabel_bantuans.unit_masuk, Tabel_bantuans.keluar_tunai, Tabel_bantuans.keluar_luring, Tabel_bantuans.keluar_kredit, Tabel_bantuans.saldo FROM 
+                            (SELECT Products.id, Products.name, ifnull(satus.unit_masuk, 0) AS unit_masuk, ifnull(duas.qty, 0) AS keluar_tunai, ifnull(tigas.unit, 0) AS keluar_luring, ifnull(empats.qty, 0) AS keluar_kredit, 
+                            (ifnull(satus.unit_masuk,0) - ifnull(duas.qty,0) - ifnull(tigas.unit,0) - ifnull(empats.qty,0)) AS saldo FROM Products
+                                LEFT JOIN (SELECT Detail_persediaans.product_id, SUM(unit_masuk) AS unit_masuk FROM Detail_persediaans GROUP BY product_id) satus
+                                ON Products.id = satus.product_id
+                                LEFT JOIN (SELECT Detail_order_tunais.product_id, SUM(qty) AS qty FROM Detail_order_tunais GROUP BY product_id) duas
+                                ON products.id = duas.product_id
+                                LEFT JOIN (SELECT Detail_nota_lurings.product_id, SUM(unit) AS unit FROM Detail_nota_lurings GROUP BY product_id) tigas
+                                ON products.id = tigas.product_id
+                                LEFT JOIN (SELECT Detail_order_ks.product_id, SUM(qty) AS qty FROM Detail_order_ks
+                                    INNER JOIN Master_order_ks ON Detail_order_ks.master_order_k_id = master_order_ks.id
+                                    INNER JOIN Order_kredit_disetujuis ON Master_order_ks.id = Order_kredit_disetujuis.master_order_k_id
+                                    WHERE Order_kredit_disetujuis.id != 0 GROUP BY product_id) empats
+                                ON products.id = empats.product_id) AS Tabel_bantuans
+                        ");
+        
+        $orderans = Detail_order_k::where('master_order_k_id', $request->master_order_k_id)->get();
+        foreach ($orderans as $orderan){
+            $iddicek = $orderan->product_id;
+            $kolom = array_column($kps, 'id');
+            $hasil_cari = array_search($iddicek, $kolom);
+                if($kps[$hasil_cari]->saldo < $orderan->qty) {
+                    return redirect('/menuorderk')->with('error', 'Jumlah Barang/Produk yang dipesan melebihi jumlah barang/produk yang tersedia, Silahkan hubungi pelanggan bersangkutan!');
+                }
+        }
+
+
         $token = $this->generate_token();
 
         $request->validate([

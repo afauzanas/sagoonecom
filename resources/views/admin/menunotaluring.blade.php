@@ -48,7 +48,7 @@ th {
             <td>
             <a href="/menunotaluring/formedit/{{$masternotal->id}}" class="btn btn-success">Edit</a>
             <a href="{{ route('detailnotal', $masternotal->id) }}" class="btn btn-warning">Detail</a>
-              <form action="{{ route('deletenotal', $masternotal->id) }}" method="POST" class="d-inline">
+              <form action="{{ route('deletenotal', $masternotal->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus {{$masternotal->no_nota_luring}} ?')">
                   @csrf
                   @method('DELETE')
                  <button type="submit" class="btn btn-danger">Delete</button>

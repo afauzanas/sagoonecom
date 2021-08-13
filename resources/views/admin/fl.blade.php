@@ -54,7 +54,7 @@ th {
             <td>
             <a href="{{ route('fl.show', $fl->id) }}" class="btn btn-success">Lihat Orderan</a>
             <a href="{{ route('fl.edit', $fl->id) }}" class="btn btn-secondary">Edit</a>
-                <form action="{{ route('fl.destroy', $fl->id) }}" method="POST" class="d-inline">
+                <form action="{{ route('fl.destroy', $fl->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus {{$fl->pengiriman_barang_k->no_faktur}} ?')">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">Hapus</button>

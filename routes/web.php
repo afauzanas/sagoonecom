@@ -144,11 +144,14 @@ Route::patch('/fl/update/{id}', [FlController::class, 'update'])->name('fl.updat
 Route::delete('/fl/destroy/{id}', [FlController::class, 'destroy'])->name('fl.destroy')->middleware('auth', 'bendahara');
 
 Route::get('/daftarpesanantunai', [DpController::class, 'tunai'])->name('daftarpesanan.tunai')->middleware('auth');
+Route::get('/daftarpesanantunai/showtunai/{id}', [DpController::class, 'showtunai'])->name('daftarpesanan.showtunai')->middleware('auth');
 Route::get('/daftarpesanan/createtunai/{id}', [DpController::class, 'createtunai'])->name('daftarpesanan.createtunai')->middleware('auth');
 Route::post('/daftarpesanan/storetunai', [DpController::class, 'storetunai'])->name('daftarpesanan.storetunai')->middleware('auth');
 Route::get('/daftarpesanankredit', [DpController::class, 'kredit'])->name('daftarpesanan.kredit')->middleware('auth')->middleware('auth');
+Route::get('/daftarpesanantunai/showkredit/{id}', [DpController::class, 'showkredit'])->name('daftarpesanan.showkredit')->middleware('auth');
 Route::get('/daftarpesanan/createkredit/{id}', [DpController::class, 'createkredit'])->name('daftarpesanan.createkredit')->middleware('auth');
 Route::post('/daftarpesanan/storekredit', [DpController::class, 'storekredit'])->name('daftarpesanan.storekredit')->middleware('auth');
+Route::delete('/daftarpesanan/delete/{id}', [DpController::class, 'destroykredit'])->name('dp.destroykredit')->middleware('auth');
 
 Route::get('/menunotaluring', [NotaluringController::class, 'index'])->middleware('auth', 'admin');
 

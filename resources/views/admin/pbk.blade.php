@@ -36,7 +36,6 @@ th {
             <th>Tanggal Faktur</th>
             <th>Nomor OKD</th>
             <th>Tanggal Kirim</th>
-            <th>Ongkir</th>
             <th>Estimasi Sampai</th>
             <th>Ekspedisi</th>
             <th>Nomor Resi</th>
@@ -54,7 +53,6 @@ th {
             <td>{{$pbk->created_at}}</td>
             <td>{{$pbk->order_kredit_disetujui->no_order_disetujui}}</td>
             <td>{{$pbk->tgl_kirim}}</td>
-            <td>{{$pbk->ongkir}}</td>
             <td>{{$pbk->estimasi_sampai}}</td>
             <td>{{$pbk->ekspedisi->nama_ekspedisi}}</td>
             <td>{{$pbk->resi_pengiriman}}</td>
@@ -62,7 +60,7 @@ th {
             <td>
             <a href="{{ route('pbk.lihatorderan', $pbk->id) }}" class="btn btn-success">Lihat</a>
             <a href="{{ route('pbk.edit', $pbk->id) }}" class="btn btn-secondary">Edit</a>
-                <form action="{{ route('pbk.delete', $pbk->id) }}" method="POST" class="d-inline">
+                <form action="{{ route('pbk.delete', $pbk->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus {{$pbk->no_faktur}} ?')">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">Hapus</button>
@@ -78,6 +76,9 @@ th {
         @endforeach
     </tbody>
 </table>
+<h6><b>Keterangan:</b></h6>
+<h6>SL = Sudah Lunas</h6>
+<h6>BL = Belum Lunas</h6>
 </div>
 @endsection
 

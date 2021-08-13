@@ -44,7 +44,7 @@
             <td>{{$hbkd->created_at}}</td>
             <td>{{$hbkd->Permintaan_hb_kredit->user->name}}</td>
             <td>
-                <form action="{{ route('hbkd.destroy', $hbkd->id) }}" method="POST" class="d-inline">
+                <form action="{{ route('hbkd.destroy', $hbkd->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus {{$hbkd->Permintaan_hb_kredit->user->name}} ?')">
                   @csrf
                   @method('DELETE')
                  <button type="submit" class="btn btn-danger">Delete</button>

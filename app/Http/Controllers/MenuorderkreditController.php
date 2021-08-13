@@ -24,7 +24,8 @@ class MenuorderkreditController extends Controller
     public function detail($id)
     {
         $detailorderks = Detail_order_k::where('master_order_k_id', $id)->paginate(5);
-        return view('admin.detailorderk', compact('detailorderks', 'id'));
+        $name = Detail_order_k::where('master_order_k_id', $id)->first();
+        return view('admin.detailorderk', compact('detailorderks', 'id', 'name'));
     }
 
     public function show($id)

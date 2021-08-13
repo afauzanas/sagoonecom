@@ -10,7 +10,7 @@
 
 @section('content')
 <div class="container mt-5" style="width: 50%;">
-  <form class="mb-6" action="{{ route('notaluring.edit', $masternotals->id) }}" method="POST">
+  <form class="mb-6" action="{{ route('notaluring.edit', $masternotals->id) }}" method="POST" onsubmit="return confirm('Yakin ingin mengedit {{$masternotals->no_nota_luring}} ?')">
     @csrf
     @method('PATCH')
     <h1 class="text-center mb-6">Tambah Data Nota Luring</h1>

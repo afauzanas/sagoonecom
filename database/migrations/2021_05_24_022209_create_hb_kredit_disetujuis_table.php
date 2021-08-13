@@ -17,6 +17,7 @@ class CreateHbKreditDisetujuisTable extends Migration
             $table->id();
             $table->string('no_kredit_disetujui')->unique();
             $table->bigInteger('permintaan_hb_kredit_id')->unsigned();
+            $table->foreign('permintaan_hb_kredit_id')->references('id')->on('permintaan_hb_kredits');
             $table->timestamps();
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');

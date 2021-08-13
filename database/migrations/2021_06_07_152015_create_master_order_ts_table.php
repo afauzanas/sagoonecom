@@ -17,9 +17,11 @@ class CreateMasterOrderTsTable extends Migration
             $table->id();
             $table->string('no_order')->unique();
             $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
             $table->string('alamat_terima');
             $table->bigInteger('metode_bayar_id')->unsigned();
+            $table->foreign('metode_bayar_id')->references('id')->on('metode_bayars');
             $table->string('token');
         });
     }

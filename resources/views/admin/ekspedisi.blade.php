@@ -43,7 +43,7 @@
             <td>{{$ekspedisi->no_tlp}}</td>
             <td>
             <a href="/ekspedisi/formedit/{{$ekspedisi->id}}" class="btn btn-success">Edit</a>
-              <form action="/ekspedisi/delete/{{$ekspedisi->id}}" method="POST" class="d-inline">
+              <form action="/ekspedisi/delete/{{$ekspedisi->id}}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus {{$ekspedisi->nama_ekspedisi}} ?')">
                   @csrf
                   @method('DELETE')
                  <button type="submit" class="btn btn-danger">Delete</button>

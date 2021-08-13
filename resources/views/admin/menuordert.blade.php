@@ -72,6 +72,9 @@ th {
         @endforeach
     </tbody>
 </table>
+<h6><b>Keterangan:</b></h6>
+<h6>SD = Sudah Disetujui</h6>
+<h6>BD = Belum Disetujui</h6>
 </div>
 @endsection
 
